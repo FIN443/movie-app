@@ -1,4 +1,5 @@
 # Movie App
 
-React JS Fundamentals
-Node.js version 10
+React movie app
+
+[Link](https://fin443.github.io/movie-app/)
