@@ -16,38 +16,34 @@ function MovieDetail({
   return (
     <div>
       <div
+        className={styles.movie__background}
         style={{
           backgroundImage: `url(${backgroundImage})`,
-          opacity: 0.4,
-          position: "fixed",
-          top: 0,
-          left: 0,
-          height: "100vh",
-          width: "100vw",
-          zIndex: "-1",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
         }}
       ></div>
-      <div className={styles.content}>
-        <img src={coverImg} alt={title} />
-        <h1>{title}</h1>
-        <h3>{rating} / 10</h3>
-        <h4>{runtime} min</h4>
-        <h4>Genres</h4>
-        <ul>
-          {genres ? genres.map((g, index) => <li key={index}>{g}</li>) : genre}
-        </ul>
-        <p>{description}</p>
-
+      <div className={styles.container}>
+        <div className={styles.movie__info}>
+          <img className={styles.movie__image} src={coverImg} alt={title} />
+          <div>
+            <h1 className={styles.movie__title}>{title}</h1>
+            <h3 className={styles.movie__rating}>{rating} / 10</h3>
+            <h4 className={styles.movie__runtime}>{runtime} min</h4>
+            <h4 className={styles.movie__genre}>Genres</h4>
+            <ul className={styles.movie__genres}>
+              {genres
+                ? genres.map((g, index) => <li key={index}>{g}</li>)
+                : genre}
+            </ul>
+          </div>
+        </div>
+        <p className={styles.movie__description}>{description}</p>
         {trailerCode ? (
           <div>
             <h4>Trailer</h4>
             <iframe
               width="720"
               height="480"
-              src={`https://www.youtube.com/embed/${trailerCode}?playlist=${trailerCode}`}
+              src={`https://www.youtube.com/embed/${trailerCode}`}
               frameBorder="0"
             ></iframe>
           </div>
@@ -58,12 +54,15 @@ function MovieDetail({
 }
 
 MovieDetail.propTypes = {
-  coverImg: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string,
+  coverImg: PropTypes.string,
   title: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  runtime: PropTypes.number,
   genres: PropTypes.arrayOf(PropTypes.string),
   genre: PropTypes.string,
   description: PropTypes.string.isRequired,
+  trailerCode: PropTypes.string,
 };
 
 export default MovieDetail;

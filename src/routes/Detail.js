@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MovieDetail from "../components/MovieDetail";
+import styles from "./Detail.module.css";
 
 function Detail() {
   const params = useParams();
@@ -16,12 +17,14 @@ function Detail() {
   };
   useEffect(() => {
     getMovie(params.id);
+    window.scrollTo(0, 0);
   }, []);
-  console.log(movie);
   return (
     <div>
       {loading ? (
-        <h1>Loading...</h1>
+        <div className={styles.loader}>
+          <h1>Loading...</h1>
+        </div>
       ) : (
         <MovieDetail
           backgroundImage={movie.background_image}
